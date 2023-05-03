@@ -20,7 +20,7 @@ class ShowList:
             shows = shows + f"{s}\n"
         return shows
 
-    # adds "show" to the list of shows
+    # adds "show" to the list of shows and updates all fields accordingly
     def add_show(self, show: s):
         self.shows.append(show)
         self.length += 1
