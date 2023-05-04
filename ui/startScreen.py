@@ -1,7 +1,7 @@
 from tkinter import *
 
 root = Tk()
-
+images = list()  # list of the images used for this frame
 
 # sets up all necessary details associated with the current frame
 def set_frame():
@@ -15,16 +15,14 @@ def set_frame():
 def set_images():
     icon = PhotoImage(file="../images/taiga_logo.png")
     # "../images/taiga_donut.png"
-    # img1 = create_image_label("../images/taiga_donut.png")
-    # img1.pack()
+    # create_image_label("../images/taiga_donut.png")
     root.iconphoto(True, icon)
-
 
 # helper function to help create image labels
 def create_image_label(s: str):
     img = PhotoImage(file=s)
-    label = Label(root, image=img)
-    return label
+    label = Label(root, image=img, text="hello world", compound="bottom")
+    label.pack()
 
 
 set_frame()
