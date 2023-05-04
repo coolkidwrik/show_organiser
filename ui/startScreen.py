@@ -3,14 +3,21 @@ from tkinter import *
 root = Tk()
 bg = "#e7abf5"  # background color of the screen
 img1 = PhotoImage(file="../images/taiga_donut.png")
+img2 = PhotoImage(file="../images/sakura_background.png")
 
 
 # sets up all necessary details associated with the current frame
 def set_frame():
+    set_frame_info()
+    set_bg()
+    set_buttons()
+
+
+# sets all base info of the frame
+def set_frame_info():
     root.geometry("700x500")
     root.title("My Show List")
     set_icon()
-    set_bg()
     root.resizable(False, False)
 
 
@@ -22,12 +29,21 @@ def set_icon():
 
 # sets the necessary background of the frame
 def set_bg():
+    width = root.winfo_screenwidth()
+    height = root.winfo_screenheight()
     canvas = Canvas(root,
-                    width=root.winfo_screenwidth(),
-                    height=root.winfo_screenheight())
+                    width=width,
+                    height=height)
+    canvas.create_image(0, 0, image=img2, anchor=NW)
     canvas.create_image(510, 355, image=img1)
+    canvas.create_text(330, 100, text="My Show List", font=("Calibre", 60, "bold italic"), fill="#fa39b3")
     canvas.place(x=0, y=0)
     canvas.configure(bg=bg)
+
+
+# sets all the buttons on the frame
+def set_buttons():
+    pass
 
 
 set_frame()
