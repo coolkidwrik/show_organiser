@@ -1,4 +1,5 @@
 from tkinter import *
+from tkmacosx import Button
 
 root = Tk()
 bg = "#e7abf5"  # background color of the screen
@@ -36,19 +37,43 @@ def set_bg():
                     height=height)
     canvas.create_image(0, 0, image=img2, anchor=NW)
     canvas.create_image(510, 355, image=img1)
-    canvas.create_text(330, 100, text="My Show List", font=("Calibre", 60, "bold italic"), fill="#fa39b3")
+    canvas.create_text(330, 150, text="My Show List", font=("Comic Sans", 60, "bold italic"), fill="#fa39b3")
     canvas.place(x=0, y=0)
-    canvas.configure(bg=bg)
 
 
 # sets all the buttons on the frame
 def set_buttons():
-    pass
+    button1 = create_button(text="Browse Lists", command=root.destroy)
+    button2 = create_button(text="Create New Lists", command=root.destroy)
+    button3 = create_button(text="Quit", command=root.destroy)
+    button1.place(x=100, y=250)
+    button2.place(x=100, y=300)
+    button3.place(x=100, y=350)
+
+
+def create_button(**kwargs):
+    # for handling errors
+    valid_indexes = {'text', 'command'}
+    items = kwargs.items()
+    assert items.__sizeof__() <= valid_indexes.__sizeof__(), "too many arguments"
+    for key, value in items:
+        assert key in valid_indexes, "not a valid index"
+
+    # working function
+    button = Button(root,
+                    text=kwargs['text'],
+                    bg=bg,
+                    width=270,
+                    height=40,
+                    highlightbackground=bg,
+                    fg="#fa39b3",
+                    font=("Comic Sans", 30, "italic"),
+                    command=kwargs['command'])
+    return button
 
 
 set_frame()
 root.mainloop()
-
 
 # the following code is for a label. Since labels don't support transparent backgrounds, it is not used
 
