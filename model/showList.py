@@ -15,10 +15,10 @@ class ShowList:
 
     # return a string representing the shows in the list
     def __repr__(self):
-        shows = ""
-        for s in self.shows:
-            shows = shows + f"{s}\n"
-        return shows
+        slist = ""
+        for show in self.shows:
+            slist = slist + f"{show.name}\n"
+        return slist
 
     # adds "show" to the list of shows and updates all fields accordingly
     def add_show(self, show: s):

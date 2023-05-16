@@ -7,8 +7,8 @@ class Show:
         self.name = name  # name of the show, should be a string
         self.score = None  # score out of 10. should be a float
         self.genres = list()  # list of genres, each genre should be a string
-        self.seasons = 1  # number of seasons
-        self.episodes = None  # number of episodes
+        self.seasons = 1  # number of seasons (default = 1)
+        self.episodes = 1  # number of episodes (default = 1)
         self.type = None  # type of the show, could be a movie or series
         self.description = None  # text description of the show
 
@@ -26,16 +26,17 @@ class Show:
     # sets the rating of the show to the user input: "score"
     def set_score(self, score: float):
         # assert type(score) == float, f"score inputted is not a number"
+        assert 0 < score < 10, f" {score} is not within [0,10]"
         self.score = score
 
     # sets the seasons of the show to the user input: "seasons"
     def set_seasons(self, seasons: int):
-        assert seasons != 0, "show cannot have 0 seasons"
+        assert seasons > 0, "show cannot have 0 seasons or less"
         self.seasons = seasons
 
     # sets the episodes of the show to the user input: "episodes"
     def set_episodes(self, episodes: int):
-        assert episodes != 0, "show cannot have 0 episodes"
+        assert episodes > 0, "show cannot have 0 episodes or less"
         self.episodes = episodes
         if episodes == 1:
             self.type = "Movie"

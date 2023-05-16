@@ -1,35 +1,42 @@
 from tkinter import *
 from tkmacosx import Button
 
-root = Tk()
-bg = "#e7abf5"  # background color of the screen
-img1 = PhotoImage(file="../images/taiga_donut.png")
-img2 = PhotoImage(file="../images/sakura_background.png")
+
+# creates a widget that acts as the starting screen for the GUI
+class StartScreen:
+
+    # initializes the screen
+    def __init__(self):
+        root = Tk()
+        img1 = PhotoImage(file="../images/taiga_donut.png")
+        img2 = PhotoImage(file="../images/sakura_background.png")
+        set_frame(root, img1, img2)
+        root.mainloop()
 
 
 # sets up all necessary details associated with the current frame
-def set_frame():
-    set_frame_info()
-    set_bg()
-    set_buttons()
+def set_frame(root: Tk, img1: PhotoImage, img2: PhotoImage):
+    set_frame_info(root)
+    set_bg(root, img1, img2)
+    set_buttons(root)
 
 
 # sets all base info of the frame
-def set_frame_info():
+def set_frame_info(root: Tk):
     root.geometry("700x500")
     root.title("My Show List")
-    set_icon()
+    set_icon(root)
     root.resizable(False, False)
 
 
 # sets the icon of the frame
-def set_icon():
+def set_icon(root: Tk):
     icon = PhotoImage(file="../images/taiga_logo.png")
     root.iconphoto(True, icon)
 
 
 # sets the necessary background of the frame
-def set_bg():
+def set_bg(root: Tk, img1: PhotoImage, img2: PhotoImage):
     width = root.winfo_screenwidth()
     height = root.winfo_screenheight()
     canvas = Canvas(root,
@@ -42,16 +49,16 @@ def set_bg():
 
 
 # sets all the buttons on the frame
-def set_buttons():
-    button1 = create_button(text="Browse Lists", command=root.destroy)
-    button2 = create_button(text="Create New Lists", command=root.destroy)
-    button3 = create_button(text="Quit", command=root.destroy)
-    button1.place(x=100, y=250)
-    button2.place(x=100, y=300)
-    button3.place(x=100, y=350)
+def set_buttons(root: Tk):
+    button1 = create_button(root, text="Browse Lists", command=root.destroy)
+    button2 = create_button(root, text="Create New Lists", command=root.destroy)
+    button3 = create_button(root, text="Quit", command=root.destroy)
+    button1.place(x=80, y=250)
+    button2.place(x=80, y=300)
+    button3.place(x=80, y=350)
 
 
-def create_button(**kwargs):
+def create_button(root: Tk, **kwargs):
     # for handling errors
     valid_indexes = {'text', 'command'}
     items = kwargs.items()
@@ -60,6 +67,7 @@ def create_button(**kwargs):
         assert key in valid_indexes, "not a valid index"
 
     # working function
+    bg = "#e7abf5"  # background color of the button
     button = Button(root,
                     text=kwargs['text'],
                     bg=bg,
@@ -70,10 +78,14 @@ def create_button(**kwargs):
                     font=("Comic Sans", 30, "italic"),
                     command=kwargs['command'])
     return button
+#
+#
+# set_frame()
+# root.mainloop()
 
 
-set_frame()
-root.mainloop()
+# testing
+screen = StartScreen()
 
 # the following code is for a label. Since labels don't support transparent backgrounds, it is not used
 
